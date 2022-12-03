@@ -25,7 +25,7 @@ game();
 function game (){
     for(let i=0; i<5; i++){
         let computerChoice = getComputerChoice();
-        console.log(computerChoice);
+        let playerSelection = getPlayerSelection();
     }
 }
 
@@ -46,7 +46,20 @@ function getComputerChoice(){
 }
 //request an input from the user using prompt() 
     //assign to playerSelection
-//test the input to ensure it is a valid choice
+function getPlayerSelection(){
+    let promptChoice = prompt("Please enter rock, paper, or scissors:");
+    promptChoice = promptChoice.toLowerCase();
+    promptChoice = testPromptChoice(promptChoice);
+}
+
+//test the input from getPlayerSelection to ensure it is a valid choice
+function testPromptChoice(promptChoice){
+    while(promptChoice != "rock" && promptChoice != "paper" && promptChoice != "scissors"){
+        promptChoice = prompt("Please enter a valid choice (\"rock, paper, or scissors\"):");
+        promptChoice = promptChoice.toLowerCase();
+    }
+    return promptChoice;
+}
 //test the user's input against the computer's choice using playRound function
 /*if computer chooses rock and user chooses scissors, the user loses
     if user chooses paper, the user wins
