@@ -24,11 +24,26 @@ game();
 
 function game (){
     for(let i=0; i<5; i++){
-        console.log(i);
+        let computerChoice = getComputerChoice();
+        console.log(computerChoice);
     }
 }
+
 //generate a random choice for the computer with getComputerChoice
     //assign to computerSelection
+function getComputerChoice(){
+    let randomCompChoice = Math.trunc(Math.random() * 100);
+    if (randomCompChoice <= 33){
+        randomCompChoice = "rock";
+    }
+    else if(randomCompChoice >= 34 && randomCompChoice <= 66){
+        randomCompChoice = "paper";
+    }
+    else{
+        randomCompChoice = "scissors";
+    }
+    return randomCompChoice;
+}
 //request an input from the user using prompt() 
     //assign to playerSelection
 //test the input to ensure it is a valid choice
