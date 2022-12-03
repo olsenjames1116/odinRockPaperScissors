@@ -20,6 +20,13 @@ Given your inputs, what are the steps necessary to return the desired output?
 */
 
 //while the round is less than or equal to 5, continue the game using game()
+game();
+
+function game (){
+    for(let i=0; i<5; i++){
+        console.log(i);
+    }
+}
 //generate a random choice for the computer with getComputerChoice
     //assign to computerSelection
 //request an input from the user using prompt() 
