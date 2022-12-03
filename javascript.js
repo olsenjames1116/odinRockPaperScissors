@@ -19,6 +19,10 @@ Given your inputs, what are the steps necessary to return the desired output?
     rounds are complete.
 */
 
+let scoreArray;
+let compScore = 0;
+let userScore = 0;
+
 //while the round is less than or equal to 5, continue the game using game()
 game();
 
@@ -31,12 +35,13 @@ function game (){
         console.log("Computer: " + computerChoice);
         console.log("Player: " + playerSelection);
         console.log(resultOfRound);
+        console.log("Score\n-----\nUser: " + scoreArray[0] + "\nComputer: " + scoreArray[1]);
         console.log("--------------------------------------");
     }
 }
 
 //generate a random choice for the computer with getComputerChoice
-    //assign to computerSelection
+    //assign to randomCompChoice
 function getComputerChoice(){
     let randomCompChoice = Math.trunc(Math.random() * 100);
     if (randomCompChoice <= 33){
@@ -51,7 +56,7 @@ function getComputerChoice(){
     return randomCompChoice;
 }
 //request an input from the user using prompt() 
-    //assign to playerSelection
+    //assign to promptChoice
 function getPlayerSelection(){
     let promptChoice = prompt("Please enter rock, paper, or scissors:");
     promptChoice = promptChoice.toLowerCase();
@@ -60,6 +65,7 @@ function getPlayerSelection(){
 }
 
 //test the input from getPlayerSelection to ensure it is a valid choice
+    //assign to promptChoice
 function testPromptChoice(promptChoice){
     while(promptChoice != "rock" && promptChoice != "paper" && promptChoice != "scissors"){
         promptChoice = prompt("Please enter a valid choice (\"rock, paper, or scissors\"):");
@@ -67,54 +73,85 @@ function testPromptChoice(promptChoice){
     }
     return promptChoice;
 }
-//test the user's input against the computer's choice using playRound function
 
+//test the user's input against the computer's choice using playRound function
+    //assign to roundResult
+    //calls to keepScore with the argument givePoint
 function playRound(computerChoice, playerSelection){
     let roundResult;
+    let givePoint;
+
+    /*if computer chooses rock and user chooses rock, it is a draw
+        if user chooses paper, the user wins
+        else, the user chose scissors and the user loses*/
     if(computerChoice === "rock"){
         if(playerSelection === "rock"){
             roundResult = "Draw! You both chose rock!";
+            givePoint = 3;
         }
         else if(playerSelection === "paper"){
             roundResult = "Winner! Paper covers rock!";
+            givePoint = 1;
         }
         else{
             roundResult = "Loser! Rock crushes scissors!";
+            givePoint = 2;
         }
     }
+
+    /*if computer chooses paper and user chooses rock, the user loses
+    if user chooses paper, it is a draw
+    else, the user chose scissors and the user wins*/
     else if(computerChoice === "paper"){
         if(playerSelection === "rock"){
             roundResult = "Loser! Paper covers rock!";
+            givePoint = 2;
         }
         else if(playerSelection = "paper"){
             roundResult = "Draw! You both chose paper!";
+            givePoint = 3;
         }
         else{
             roundResult = "Winner! Scissors cuts paper!"
+            givePoint = 1;
         }
     }
+
+    /*else, computer has chosen scissors
+        if the user chose rock, the user wins
+        else if the user chose paper, the user loses
+        else, the user has chosen scissors and it is a draw*/
     else{
         if(playerSelection === "rock"){
             roundResult = "Winner! Rock crushes scissors!";
+            givePoint = 1;
         }
         else if(playerSelection === "paper"){
             roundResult = "Loser! Scissors cuts paper!";
+            givePoint = 2;
         }
         else{
             roundResult = "Draw! You both chose scissors!"
+            givePoint = 3;
         }
     }
+    keepScore(givePoint);
     return roundResult;
 }
-/*if computer chooses rock and user chooses scissors, the user loses
-    if user chooses paper, the user wins
-    else it is a draw*/
-/*if computer chooses paper and user chooses rock, user loses
-    if user chooses scissors, user wins
-    else it is a draw*/
-/*if computer chooses scissors and user chooses rock, user wins
-    if user chooses paper, user loses
-    else it is a draw*/
-//add score to either computer or user based off result
+
+//add score to computer, user, or both based off result
+function keepScore(givePoint){
+    if(givePoint === 1){
+        userScore++;
+    }
+    else if(givePoint === 2){
+        compScore++;
+    }
+    else{
+        userScore++;
+        compScore++;
+    }
+    scoreArray = [userScore, compScore];
+}
 //output result to console
 //end loop
