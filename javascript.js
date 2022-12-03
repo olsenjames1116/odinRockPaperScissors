@@ -24,8 +24,14 @@ game();
 
 function game (){
     for(let i=0; i<5; i++){
+        console.log("Round " + (i+1) + " of 5");
         let computerChoice = getComputerChoice();
         let playerSelection = getPlayerSelection();
+        let resultOfRound = playRound(computerChoice, playerSelection);
+        console.log("Computer: " + computerChoice);
+        console.log("Player: " + playerSelection);
+        console.log(resultOfRound);
+        console.log("--------------------------------------");
     }
 }
 
@@ -50,6 +56,7 @@ function getPlayerSelection(){
     let promptChoice = prompt("Please enter rock, paper, or scissors:");
     promptChoice = promptChoice.toLowerCase();
     promptChoice = testPromptChoice(promptChoice);
+    return  promptChoice;
 }
 
 //test the input from getPlayerSelection to ensure it is a valid choice
@@ -61,6 +68,44 @@ function testPromptChoice(promptChoice){
     return promptChoice;
 }
 //test the user's input against the computer's choice using playRound function
+
+function playRound(computerChoice, playerSelection){
+    let roundResult;
+    if(computerChoice === "rock"){
+        if(playerSelection === "rock"){
+            roundResult = "Draw! You both chose rock!";
+        }
+        else if(playerSelection === "paper"){
+            roundResult = "Winner! Paper covers rock!";
+        }
+        else{
+            roundResult = "Loser! Rock crushes scissors!";
+        }
+    }
+    else if(computerChoice === "paper"){
+        if(playerSelection === "rock"){
+            roundResult = "Loser! Paper covers rock!";
+        }
+        else if(playerSelection = "paper"){
+            roundResult = "Draw! You both chose paper!";
+        }
+        else{
+            roundResult = "Winner! Scissors cuts paper!"
+        }
+    }
+    else{
+        if(playerSelection === "rock"){
+            roundResult = "Winner! Rock crushes scissors!";
+        }
+        else if(playerSelection === "paper"){
+            roundResult = "Loser! Scissors cuts paper!";
+        }
+        else{
+            roundResult = "Draw! You both chose scissors!"
+        }
+    }
+    return roundResult;
+}
 /*if computer chooses rock and user chooses scissors, the user loses
     if user chooses paper, the user wins
     else it is a draw*/
