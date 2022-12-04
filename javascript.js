@@ -38,6 +38,7 @@ function game (){
         console.log("Score\n-----\nUser: " + scoreArray[0] + "\nComputer: " + scoreArray[1]);
         console.log("--------------------------------------");
     }
+    displayFinalResult();
 }
 
 //generate a random choice for the computer with getComputerChoice
@@ -86,7 +87,7 @@ function playRound(computerChoice, playerSelection){
         else, the user chose scissors and the user loses*/
     if(computerChoice === "rock"){
         if(playerSelection === "rock"){
-            roundResult = "Draw! You both chose rock!";
+            roundResult = "Draw! We both chose rock!";
             givePoint = 3;
         }
         else if(playerSelection === "paper"){
@@ -108,7 +109,7 @@ function playRound(computerChoice, playerSelection){
             givePoint = 2;
         }
         else if(playerSelection = "paper"){
-            roundResult = "Draw! You both chose paper!";
+            roundResult = "Draw! We both chose paper!";
             givePoint = 3;
         }
         else{
@@ -131,7 +132,7 @@ function playRound(computerChoice, playerSelection){
             givePoint = 2;
         }
         else{
-            roundResult = "Draw! You both chose scissors!"
+            roundResult = "Draw! We both chose scissors!"
             givePoint = 3;
         }
     }
@@ -153,5 +154,20 @@ function keepScore(givePoint){
     }
     scoreArray = [userScore, compScore];
 }
+
+//figures out the final score and outputs the result
+function displayFinalResult(){
+    let userScoreFinal = scoreArray[0];
+    let compScoreFinal = scoreArray[1];
+
+    if(userScoreFinal>compScoreFinal){
+        console.log("You won the game...you must have cheated. Think you can do it again? Reload the browser for a new game");
+    }
+    else if(compScoreFinal>userScoreFinal){
+        console.log("HAHA I win!!!! >:) Want a rematch? Reload the browser for a new game")
+    }
+    else{
+        console.log("We tied...lame. Reload the browser for a new game");
+    }
+}
 //output result to console
-//end loop
