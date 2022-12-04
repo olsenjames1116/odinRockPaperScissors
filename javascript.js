@@ -32,11 +32,7 @@ function game (){
         let computerChoice = getComputerChoice();
         let playerSelection = getPlayerSelection();
         let resultOfRound = playRound(computerChoice, playerSelection);
-        console.log("Computer: " + computerChoice);
-        console.log("Player: " + playerSelection);
-        console.log(resultOfRound);
-        console.log("Score\n-----\nUser: " + scoreArray[0] + "\nComputer: " + scoreArray[1]);
-        console.log("--------------------------------------");
+        displayRoundResult(computerChoice, playerSelection, resultOfRound);
     }
     displayFinalResult();
 }
@@ -155,6 +151,15 @@ function keepScore(givePoint){
     scoreArray = [userScore, compScore];
 }
 
+//output round result to console
+function displayRoundResult(computerChoice, playerSelection, resultOfRound){
+    console.log("Computer: " + computerChoice);
+    console.log("Player: " + playerSelection);
+    console.log(resultOfRound);
+    console.log("Score\n-----\nUser: " + scoreArray[0] + "\nComputer: " + scoreArray[1]);
+    console.log("--------------------------------------");
+}
+
 //figures out the final score and outputs the result
 function displayFinalResult(){
     let userScoreFinal = scoreArray[0];
@@ -170,4 +175,3 @@ function displayFinalResult(){
         console.log("We tied...lame. Reload the browser for a new game");
     }
 }
-//output result to console
