@@ -171,11 +171,41 @@ function keepScore(givePoint){
 
 //output round result to console
 function displayRoundResult(computerChoice, playerSelection, resultOfRound){
-    console.log("Computer: " + computerChoice);
-    console.log("Player: " + playerSelection);
-    console.log(resultOfRound);
-    console.log("Score\n-----\nUser: " + scoreArray[0] + "\nComputer: " + scoreArray[1]);
-    console.log("--------------------------------------");
+    const roundDiv = document.createElement("div");
+
+    roundDiv.classList.add("round");
+
+    const computerPara = document.createElement("p");
+    computerPara.textContent = `Computer: ${computerChoice}`;
+
+    const playerPara = document.createElement("p");
+    playerPara.textContent = `Player: ${playerSelection}`;
+
+    const resultPara = document.createElement("p");
+    resultPara.textContent = `${resultOfRound}`;
+
+    const dashesPara = document.createElement("p");
+    dashesPara.textContent = createDashes(resultOfRound);
+
+    const paraArray = [computerPara, playerPara, resultPara, dashesPara];
+    
+    paraArray.forEach(para => roundDiv.appendChild(para));
+
+    const body = document.querySelector("body");
+    body.appendChild(roundDiv);
+    //console.log("Score\n-----\nUser: " + scoreArray[0] + "\nComputer: " + scoreArray[1]);
+    //console.log("--------------------------------------");
+}
+
+//dynamically create dashes to more closely match the length of the last string in the div
+function createDashes(resultOfRound){
+    let dashes = "";
+
+    for(let i=0; i<resultOfRound.length + 10; i++){
+        dashes += "-";
+    }
+
+    return dashes;
 }
 
 //figures out the final score and outputs the result
