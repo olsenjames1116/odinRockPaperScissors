@@ -27,14 +27,24 @@ let userScore = 0;
 game();
 
 function game (){
-    for(let i=0; i<5; i++){
-        console.log("Round " + (i+1) + " of 5");
-        let computerChoice = getComputerChoice();
-        let playerSelection = getPlayerSelection();
-        let resultOfRound = playRound(computerChoice, playerSelection);
+    //for(let i=0; i<5; i++){
+
+    //Does not begin game until the eventListener is called by clicking a
+        //button for the player choice
+    const buttons = document.querySelectorAll('button');
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", event => {
+        
+        const playerSelection = event.target.className;
+
+        const computerChoice = getComputerChoice();
+        const resultOfRound = playRound(computerChoice, playerSelection);
         displayRoundResult(computerChoice, playerSelection, resultOfRound);
-    }
-    displayFinalResult();
+        //displayFinalResult();
+        })
+    })
+    //}
 }
 
 //generate a random choice for the computer with getComputerChoice
@@ -55,11 +65,19 @@ function getComputerChoice(){
 //request an input from the user using prompt() 
     //assign to promptChoice
 function getPlayerSelection(){
-    let promptChoice = prompt("Please enter rock, paper, or scissors:");
-    promptChoice = promptChoice.toLowerCase();
-    promptChoice = testPromptChoice(promptChoice);
-    return  promptChoice;
+    const buttons = document.querySelectorAll('button');
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", event => {
+        
+        const playerSelection = event.target.className;
+
+        console.log(playerSelection);
+        }
+        )
+    })
 }
+
 
 //test the input from getPlayerSelection to ensure it is a valid choice
     //assign to promptChoice
@@ -161,7 +179,7 @@ function displayRoundResult(computerChoice, playerSelection, resultOfRound){
 }
 
 //figures out the final score and outputs the result
-function displayFinalResult(){
+/*function displayFinalResult(){
     let userScoreFinal = scoreArray[0];
     let compScoreFinal = scoreArray[1];
 
@@ -174,4 +192,4 @@ function displayFinalResult(){
     else{
         console.log("We tied...lame. Reload the browser for a new game");
     }
-}
+}*/
