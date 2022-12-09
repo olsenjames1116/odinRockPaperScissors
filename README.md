@@ -1,3 +1,3 @@
 # odinRockPaperScissors
 
-This is a game of rock, paper, scissors between a user and the computer. This game takes input from a prompt to the user and give the computer a random choice. Each round will output the choices for both the user and computer to the console as well as keep score. After all 5 rounds have been completed, a final score will be output and a winner determined. To replay the game, the webpage must be refreshed.
+This is a game of rock, paper, scissors between a user and the computer. This game takes input from buttons displayed on a webpage to a user and give the computer a random choice. Each round will output the choices for both the user and computer to the console as well as keep score. After either the computer or the user has scored 5 points, a final score will be output and a winner determined. To replay the game, the webpage must be refreshed.
