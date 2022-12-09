@@ -22,29 +22,33 @@ Given your inputs, what are the steps necessary to return the desired output?
 let scoreArray;
 let compScore = 0;
 let userScore = 0;
+let round = 0;
+let maxRound = 5;
+const body = document.querySelector("body");
 
 //while the round is less than or equal to 5, continue the game using game()
 game();
 
 function game (){
-    //for(let i=0; i<5; i++){
-
     //Does not begin game until the eventListener is called by clicking a
-        //button for the player choice
+        //button for the player choice  
     const buttons = document.querySelectorAll('button');
-
     buttons.forEach((button) => {
         button.addEventListener("click", event => {
-        
-        const playerSelection = event.target.className;
+            if(round<maxRound){
+                const playerSelection = event.target.className;
 
-        const computerChoice = getComputerChoice();
-        const resultOfRound = playRound(computerChoice, playerSelection);
-        displayRoundResult(computerChoice, playerSelection, resultOfRound);
-        //displayFinalResult();
+                const computerChoice = getComputerChoice();
+                const resultOfRound = playRound(computerChoice, playerSelection);
+                displayRoundResult(computerChoice, playerSelection, resultOfRound);
+                round++;
+
+                if(round===maxRound){
+                    displayFinalResult();
+                }
+            }
         })
     })
-    //}
 }
 
 //generate a random choice for the computer with getComputerChoice
@@ -122,7 +126,7 @@ function playRound(computerChoice, playerSelection){
             roundResult = "Loser! Paper covers rock!";
             givePoint = 2;
         }
-        else if(playerSelection = "paper"){
+        else if(playerSelection === "paper"){
             roundResult = "Draw! We both chose paper!";
             givePoint = 3;
         }
@@ -191,10 +195,8 @@ function displayRoundResult(computerChoice, playerSelection, resultOfRound){
     
     paraArray.forEach(para => roundDiv.appendChild(para));
 
-    const body = document.querySelector("body");
     body.appendChild(roundDiv);
     //console.log("Score\n-----\nUser: " + scoreArray[0] + "\nComputer: " + scoreArray[1]);
-    //console.log("--------------------------------------");
 }
 
 //dynamically create dashes to more closely match the length of the last string in the div
@@ -209,17 +211,22 @@ function createDashes(resultOfRound){
 }
 
 //figures out the final score and outputs the result
-/*function displayFinalResult(){
+function displayFinalResult(){
     let userScoreFinal = scoreArray[0];
     let compScoreFinal = scoreArray[1];
+    let resultString = "";
 
     if(userScoreFinal>compScoreFinal){
-        console.log("You won the game...you must have cheated. Think you can do it again? Reload the browser for a new game");
+        resultString = "You won the game...you must have cheated. Think you can do it again? Reload the browser for a new game";
     }
     else if(compScoreFinal>userScoreFinal){
-        console.log("HAHA I win!!!! >:) Want a rematch? Reload the browser for a new game")
+        resultString = "HAHA I win!!!! >:) Want a rematch? Reload the browser for a new game";
     }
     else{
-        console.log("We tied...lame. Reload the browser for a new game");
+        resultString = "We tied...lame. Reload the browser for a new game";
     }
-}*/
+
+    const finalResult = document.createElement('p');
+    finalResult.textContent = resultString;
+    body.appendChild(finalResult);
+}
