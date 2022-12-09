@@ -22,8 +22,7 @@ Given your inputs, what are the steps necessary to return the desired output?
 let scoreArray;
 let compScore = 0;
 let userScore = 0;
-let round = 0;
-let maxRound = 5;
+let maxScore = 5;
 const body = document.querySelector("body");
 
 //while the round is less than or equal to 5, continue the game using game()
@@ -35,15 +34,14 @@ function game (){
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
         button.addEventListener("click", event => {
-            if(round<maxRound){
+            if(compScore<maxScore && userScore<maxScore){
                 const playerSelection = event.target.className;
 
                 const computerChoice = getComputerChoice();
                 const resultOfRound = playRound(computerChoice, playerSelection);
                 displayRoundResult(computerChoice, playerSelection, resultOfRound);
-                round++;
 
-                if(round===maxRound){
+                if(compScore==maxScore || userScore===maxScore){
                     displayFinalResult();
                 }
             }
@@ -65,32 +63,6 @@ function getComputerChoice(){
         randomCompChoice = "scissors";
     }
     return randomCompChoice;
-}
-//request an input from the user using prompt() 
-    //assign to promptChoice
-function getPlayerSelection(){
-    const buttons = document.querySelectorAll('button');
-
-    buttons.forEach((button) => {
-        button.addEventListener("click", event => {
-        
-        const playerSelection = event.target.className;
-
-        console.log(playerSelection);
-        }
-        )
-    })
-}
-
-
-//test the input from getPlayerSelection to ensure it is a valid choice
-    //assign to promptChoice
-function testPromptChoice(promptChoice){
-    while(promptChoice != "rock" && promptChoice != "paper" && promptChoice != "scissors"){
-        promptChoice = prompt("Please enter a valid choice (\"rock, paper, or scissors\"):");
-        promptChoice = promptChoice.toLowerCase();
-    }
-    return promptChoice;
 }
 
 //test the user's input against the computer's choice using playRound function
@@ -166,10 +138,6 @@ function keepScore(givePoint){
     else if(givePoint === 2){
         compScore++;
     }
-    else{
-        userScore++;
-        compScore++;
-    }
     scoreArray = [userScore, compScore];
 }
 
@@ -188,15 +156,18 @@ function displayRoundResult(computerChoice, playerSelection, resultOfRound){
     const resultPara = document.createElement("p");
     resultPara.textContent = `${resultOfRound}`;
 
+    const scorePara = document.createElement("p");
+    scorePara.setAttribute("style", "white-space: pre");
+    scorePara.textContent = `--------\r\nScore\r\n--------\r\nUser: ${scoreArray[0]}\r\nComputer: ${scoreArray[1]}`;
+
     const dashesPara = document.createElement("p");
     dashesPara.textContent = createDashes(resultOfRound);
 
-    const paraArray = [computerPara, playerPara, resultPara, dashesPara];
+    const paraArray = [computerPara, playerPara, resultPara, scorePara, dashesPara];
     
     paraArray.forEach(para => roundDiv.appendChild(para));
 
     body.appendChild(roundDiv);
-    //console.log("Score\n-----\nUser: " + scoreArray[0] + "\nComputer: " + scoreArray[1]);
 }
 
 //dynamically create dashes to more closely match the length of the last string in the div
