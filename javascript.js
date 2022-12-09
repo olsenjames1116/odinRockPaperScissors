@@ -190,13 +190,9 @@ function displayFinalResult(){
     if(userScoreFinal>compScoreFinal){
         resultString = "You won the game...you must have cheated. Think you can do it again? Reload the browser for a new game";
     }
-    else if(compScoreFinal>userScoreFinal){
+    else{
         resultString = "HAHA I win!!!! >:) Want a rematch? Reload the browser for a new game";
     }
-    else{
-        resultString = "We tied...lame. Reload the browser for a new game";
-    }
-
     const finalResult = document.createElement('p');
     finalResult.textContent = resultString;
     body.appendChild(finalResult);
