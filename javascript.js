@@ -1,31 +1,34 @@
 /* Understanding the problem:
-
 I need to create a game that takes input from a user (rock, paper, or scissors)
 and tests it against the computer's choice (rock, paper, or scissors)
 to see who wins*/
 
 /* Plan:
 Does your program have a user interface? What will it look like? What functionality will the interface have?
-    The program will utilize the console so no there is not user interface
+    The program utilizes a series of buttons to assign a player choice. It will contain 3 buttons on the
+    webpage with the choices: rock, paper, or scissors. The interface will only be able to accomplish this 
+    task and will only be functional until a winner is determined and the game comes to an end.
 What inputs will your program have? Will the user enter data or will you get input from somewhere else?
     The program will need a choice from the user and a choice from the computer to
     test against each other.
 What's the desired input?
-    Desired input is rock, paper, or scissors
+    Desired input is rock, paper, or scissors.
 Given your inputs, what are the steps necessary to return the desired output?
-    I need to test the input was a valid choice, make the choice uppercase or lowercase
-    then test it against the computer's choice. Then I need to output the result of that round.
-    There are 5 rounds so score will need to be kept and the game will continue until all 5
-    rounds are complete.
+    I need to wait for a player to make a choice, then assign that choice to a variable
+    to test against the computer's choice. Then I need to output the result of that round.
+    The winner will be determined after one of them has reached 5 points so score will need to 
+    be kept and the game will continue until someone reaches 5 points.
 */
 
+
+//Initializing global variables
 let scoreArray;
 let compScore = 0;
 let userScore = 0;
 let maxScore = 5;
 const body = document.querySelector("body");
 
-//while the round is less than or equal to 5, continue the game using game()
+//while the both the player's and computer's scores are less than 5, continue the game using game()
 game();
 
 function game (){
@@ -49,8 +52,8 @@ function game (){
     })
 }
 
-//generate a random choice for the computer with getComputerChoice
-    //assign to randomCompChoice
+/*generate a random choice for the computer with getComputerChoice 
+    assign to randomCompChoice*/
 function getComputerChoice(){
     let randomCompChoice = Math.trunc(Math.random() * 100);
     if (randomCompChoice <= 33){
@@ -65,9 +68,9 @@ function getComputerChoice(){
     return randomCompChoice;
 }
 
-//test the user's input against the computer's choice using playRound function
-    //assign to roundResult
-    //calls to keepScore with the argument givePoint
+/*test the user's input against the computer's choice using playRound function
+    assign to roundResult
+    calls to keepScore with the argument givePoint*/
 function playRound(computerChoice, playerSelection){
     let roundResult;
     let givePoint;
@@ -130,7 +133,7 @@ function playRound(computerChoice, playerSelection){
     return roundResult;
 }
 
-//add score to computer, user, or both based off result
+//add score to computer, user, or neither based off result
 function keepScore(givePoint){
     if(givePoint === 1){
         userScore++;
@@ -141,7 +144,7 @@ function keepScore(givePoint){
     scoreArray = [userScore, compScore];
 }
 
-//output round result to console
+//output round result to webpage
 function displayRoundResult(computerChoice, playerSelection, resultOfRound){
     const roundDiv = document.createElement("div");
 
@@ -181,7 +184,7 @@ function createDashes(resultOfRound){
     return dashes;
 }
 
-//figures out the final score and outputs the result
+//figures out the final score and outputs the result to the webpage
 function displayFinalResult(){
     let userScoreFinal = scoreArray[0];
     let compScoreFinal = scoreArray[1];
@@ -193,6 +196,7 @@ function displayFinalResult(){
     else{
         resultString = "HAHA I win!!!! >:) Want a rematch? Reload the browser for a new game";
     }
+
     const finalResult = document.createElement('p');
     finalResult.textContent = resultString;
     body.appendChild(finalResult);
